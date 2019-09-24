@@ -35,10 +35,7 @@ public class Marketing extends Employee {
 
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "                Department: Marketing\n";
-    }
+   
 
     @Override
     public void printExtraInfo() {
@@ -47,6 +44,8 @@ public class Marketing extends Employee {
             System.out.println("                " + ListOfCustomer);
         }
     }
+
+
     
     
     

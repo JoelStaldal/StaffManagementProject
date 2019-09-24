@@ -22,10 +22,7 @@ public class WebDesigner extends Employee{
         return websites;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "                Job title: Web Designer\n";
-    }
+    
 
     @Override
     public void printExtraInfo() {
@@ -34,6 +31,8 @@ public class WebDesigner extends Employee{
             System.out.println("                " + website);
         }
     }
+
+
     
     
     

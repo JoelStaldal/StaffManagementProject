@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import utilities.GenderType;
 
-public abstract class Employee {
+public abstract class Employee implements Comparable<Employee> {
 
     private final int id;
     private double salary = 20_000;
@@ -74,7 +74,14 @@ public abstract class Employee {
 
     @Override
     public String toString() {
-        return "Employee ID: " + String.format("%2d", id) + " Name: " + name + " Birthdate: " + birthdate + " Salary: " + String.format("%,.2f", salary) + " Gender: " + gender + "\n";
+        return "ID: " + String.format("%2d", id) + String.format(" Name: %-20s", name) + " Birthdate: " + birthdate + ", Salary: " + String.format("%,.2f", salary)
+                + " Gender: " + gender.toString().charAt(0) + String.format("%-7s", gender.toString().substring(1).toLowerCase())
+                + " Job title: " + this.getClass().getSimpleName().replaceAll("([^_])([A-Z])", "$1 $2") + "\n";
+    }
+    
+    @Override
+    public int compareTo(Employee o) {
+        return (int) (this.getSalary()-o.getSalary());
     }
 
 }

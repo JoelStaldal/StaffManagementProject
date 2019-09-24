@@ -25,10 +25,7 @@ public class Technician extends Employee {
         this.nServers = nServers;
     }
     
-    @Override
-    public String toString() {
-        return super.toString() + "                Job Title: Technician\n";
-    }
+    
 
     @Override
     public void printExtraInfo() {

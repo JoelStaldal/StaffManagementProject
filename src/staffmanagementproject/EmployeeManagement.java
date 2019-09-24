@@ -9,7 +9,8 @@ import models.Technician;
 import models.WebDesigner;
 import utilities.DeveloperLevel;
 import utilities.GenderType;
-import static staffmanagementproject.StaffManagementProject.sc; 
+import static staffmanagementproject.StaffManagementProject.sc;
+
 
 public class EmployeeManagement {
     
@@ -66,7 +67,7 @@ public class EmployeeManagement {
         System.out.print("Enter gender (Male/Female/Unknown): ");
         GenderType gender = GenderType.valueOf(sc.nextLine().toUpperCase());
         System.out.print("Enter salary: ");
-        int salary = sc.nextInt();
+        double salary = (Double.parseDouble(sc.nextLine().replace(" ", "")));
 
         System.out.println("Choose job position: ");
 
@@ -155,8 +156,7 @@ public class EmployeeManagement {
             if(employeeList.get(i).getId() == id){
                 System.out.println("Current salary: " + String.format("%,.2f", employeeList.get(i).getSalary()));
                 System.out.print("New salary: ");
-                double updateSalary = sc.nextDouble();
-                employeeList.get(i).setSalary(updateSalary);
+                employeeList.get(i).setSalary((Double.parseDouble(sc.nextLine().replace(" ", ""))));
                 System.out.println("Current salary: " + String.format("%,.2f", employeeList.get(i).getSalary()));
                 return;
             }
@@ -208,7 +208,7 @@ public class EmployeeManagement {
     }
     
     public static void showAllEmployees(){
-        System.out.println("Employees in list:\n");
+        System.out.println("");
         for (Employee CurrentEmployee : employeeList) {
             System.out.println(CurrentEmployee);
         }
@@ -275,7 +275,7 @@ public class EmployeeManagement {
         if (customers.contains(customer)) {
             System.out.println("Current budget: " + String.format("%,d", Marketing.getBudget()));
             System.out.println("How much budget has been spent for the customer?");
-            Marketing.setBudget(Marketing.getBudget() - Math.abs(sc.nextInt()));
+            Marketing.setBudget(Marketing.getBudget() - Math.abs(Integer.parseInt(sc.nextLine().replace(" ", ""))));
             System.out.println("Current budget: " + String.format("%,d", Marketing.getBudget()));
             sc.nextLine();
         } else {
@@ -308,5 +308,5 @@ public class EmployeeManagement {
         ((Developer) employee).setDeveloperLevel(level);
         System.out.println("Developer level updated: " + ((Developer) employee).getDeveloperLevel());
     }
-    
+
 }

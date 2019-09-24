@@ -42,15 +42,14 @@ public class Developer extends Employee {
         this.developerLevel = developerLevel;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "                Job Title: Developer\n";
-    }
+    
 
     @Override
     public void printExtraInfo() {
-        System.out.println("                Developer level: " + developerLevel + " Programming language: " + programmingLanguage);
+        System.out.println("                Developer level: " + developerLevel.toString().charAt(0) + developerLevel.toString().substring(1).toLowerCase() + " Programming language: " + programmingLanguage);
     }
+
+
     
     
 }

@@ -112,6 +112,9 @@ public class StaffManagementProject {
         
         int id = sc.nextInt();
         Employee employee = EmployeeManagement.showOneEmployeeById(id);
+        if(employee==null){
+            return;
+        }
         
         System.out.println("1: Update name");
         System.out.println("2: Update salary");
