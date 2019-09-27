@@ -77,7 +77,7 @@ public class EmployeeStatistics {
     }
 
     public static void allSalaries() {
-        System.out.println("\nAll salaries in increasing order:\n");
+        System.out.println("\nAll salaries in ascending order:\n");
         ArrayList<Employee> sortedList = new ArrayList<>(employeeList);
         Collections.sort(sortedList);
         System.out.println("ID:  Name:                 Salary:");

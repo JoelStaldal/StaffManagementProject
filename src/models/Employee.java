@@ -74,14 +74,14 @@ public abstract class Employee implements Comparable<Employee> {
 
     @Override
     public String toString() {
-        return "ID: " + String.format("%2d", id) + String.format(" Name: %-20s", name) + " Birthdate: " + birthdate + ", Salary: " + String.format("%,.2f", salary)
+        return "Employee ID: " + String.format("%2d", id) + String.format(" Name: %-20s", name) + " Birthdate: " + birthdate + ", Salary: " + String.format("%,.2f", salary)
                 + " Gender: " + gender.toString().charAt(0) + String.format("%-7s", gender.toString().substring(1).toLowerCase())
                 + " Job title: " + this.getClass().getSimpleName().replaceAll("([^_])([A-Z])", "$1 $2") + "\n";
     }
     
     @Override
     public int compareTo(Employee o) {
-        return (int) (this.getSalary()-o.getSalary());
+        return Double.compare(this.salary, o.salary);
     }
 
 }
