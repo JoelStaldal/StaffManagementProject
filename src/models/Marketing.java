@@ -32,21 +32,12 @@ public class Marketing extends Employee {
         } else {
             Marketing.budget = budget;
         }
-
     }
-
-   
 
     @Override
     public void printExtraInfo() {
-        System.out.println("                List of customers:");
-        for (String ListOfCustomer : ListOfCustomers) {
-            System.out.println("                " + ListOfCustomer);
-        }
+        System.out.println("List of customers:");
+        ListOfCustomers.forEach(System.out::println);
+        System.out.println("");
     }
-
-
-    
-    
-    
 }

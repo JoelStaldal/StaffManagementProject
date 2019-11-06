@@ -29,7 +29,7 @@ public class Technician extends Employee {
 
     @Override
     public void printExtraInfo() {
-        System.out.println("                Responsible of: " + nServers + " servers");
+        System.out.println("Responsible of: " + nServers + " servers\n");
     }
     
 }

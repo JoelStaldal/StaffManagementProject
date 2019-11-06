@@ -46,7 +46,8 @@ public class Developer extends Employee {
 
     @Override
     public void printExtraInfo() {
-        System.out.println("                Developer level: " + developerLevel.toString().charAt(0) + developerLevel.toString().substring(1).toLowerCase() + " Programming language: " + programmingLanguage);
+        System.out.println("Developer level: " + developerLevel.toString().charAt(0) + developerLevel.toString().substring(1).toLowerCase() + "\nProgramming language: " + programmingLanguage + "\n");
+        
     }
 
 

@@ -22,14 +22,11 @@ public class WebDesigner extends Employee{
         return websites;
     }
 
-    
-
     @Override
     public void printExtraInfo() {
-        System.out.println("                List of websites:");
-        for (String website : websites) {
-            System.out.println("                " + website);
-        }
+        System.out.println("List of websites:");
+        websites.forEach(System.out::println);
+        System.out.println("");
     }
 
 

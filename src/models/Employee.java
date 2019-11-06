@@ -2,6 +2,7 @@ package models;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import utilities.GenderType;
 
 public abstract class Employee implements Comparable<Employee> {
@@ -15,13 +16,13 @@ public abstract class Employee implements Comparable<Employee> {
 
     private static int idGenerator = 1;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Employee(double salary, String name, String birthdate, GenderType gender) {
         this.id = idGenerator++;
         setSalary(salary);
         this.name = name;
-        this.birthdate = LocalDate.parse(birthdate, FORMATTER);
+        this.birthdate = LocalDate.parse(birthdate, FORMATTER); 
         this.gender = gender;
         this.employeeBonusBase = 1000;
     }
@@ -48,9 +49,11 @@ public abstract class Employee implements Comparable<Employee> {
 
     public final void setSalary(double salary) {
             if (salary < 20000) {
-                System.out.println("Too low salary, current salary is not changed");
+                System.out.println("");
+                System.out.println("Too low salary, salary is set by default to " + String.format("%,.2f", this.salary));
             } else if (salary > 100000) {
-                System.out.println("Too high salary, current salary is not changed");
+                System.out.println("");
+                System.out.println("Too high salary, salary is set by default to " + String.format("%,.2f", this.salary));
             } else {
                 this.salary = salary;
             }
@@ -74,9 +77,9 @@ public abstract class Employee implements Comparable<Employee> {
 
     @Override
     public String toString() {
-        return "Employee ID: " + String.format("%2d", id) + String.format(" Name: %-20s", name) + " Birthdate: " + birthdate + ", Salary: " + String.format("%,.2f", salary)
-                + " Gender: " + gender.toString().charAt(0) + String.format("%-7s", gender.toString().substring(1).toLowerCase())
-                + " Job title: " + this.getClass().getSimpleName().replaceAll("([^_])([A-Z])", "$1 $2") + "\n";
+        return id + "   " + String.format("%-20s ", name) + birthdate + "    "
+                + gender.toString().charAt(0) + String.format("%-7s ", gender.toString().substring(1).toLowerCase()) + String.format(" %,.2f", salary) + "    "
+                 + this.getClass().getSimpleName().replaceAll("([^_])([A-Z])", "$1 $2") + "\n";
     }
     
     @Override

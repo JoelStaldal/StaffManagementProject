@@ -5,6 +5,8 @@ import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import models.Developer;
 import models.Employee;
 import models.Marketing;
@@ -66,7 +68,7 @@ public class EmployeeStatistics {
 
     public static void sumBonus() {
         double totBonus = 0;
-        
+        System.out.println("");
         for (Employee currentEmployee : employeeList) {
             System.out.println(String.format("%-20s%,.2f", currentEmployee.getName(), currentEmployee.bonus()));
             totBonus += currentEmployee.bonus();
@@ -100,16 +102,18 @@ public class EmployeeStatistics {
     }
 
     public static void showAges() {
+        ArrayList<Employee> sortedList = new ArrayList<>(employeeList);
+        Collections.sort(sortedList, (o1, o2) -> o2.getBirthdate().compareTo(o1.getBirthdate()));
         double totAge = 0;
         System.out.println("\nName:                Age:");
-        for (Employee currentEmployee : employeeList) {
+        for (Employee currentEmployee : sortedList) {
             LocalDate x = currentEmployee.getBirthdate();
             LocalDate y = now();
             long ageInYears = YEARS.between(x, y);
             totAge += ageInYears;
             System.out.println(String.format("%-20s %d",currentEmployee.getName(),ageInYears));
         }
-        System.out.printf("\nAverage age at company: %.1f\n", totAge / employeeList.size());
+        System.out.printf("\nAverage age at company: %.1f\n", totAge / sortedList.size());
         System.out.println("");
     }
 
@@ -132,5 +136,30 @@ public class EmployeeStatistics {
 
         }
     }
-
+    
+    public static void sortByName(){
+        System.out.println("\nBy name in descending order:\n");
+        System.out.println("ID: Name:");
+        List<String> sortedByNameList = employeeList
+                .stream()
+                .sorted((a,b)->b.getName().compareTo(a.getName()))
+                .map(e -> e.getId() + "   " + e.getName())
+                .collect(Collectors.toList());
+                
+        sortedByNameList.forEach(System.out::println);
+        System.out.println("");
+    }
+    
+    public static void sortByBirthdate(){
+        System.out.println("\nBy birthdate in ascending order:\n");
+        System.out.println("Birthdate:   Name:");
+        List<String> sortedByBirthdate = employeeList
+                .stream()
+                .sorted((a,b)->a.getBirthdate().compareTo(b.getBirthdate()))
+                .map(e -> e.getBirthdate() + "   " + e.getName())
+                .collect(Collectors.toList());
+        
+        sortedByBirthdate.forEach(System.out::println);
+        System.out.println("");
+    }
 }

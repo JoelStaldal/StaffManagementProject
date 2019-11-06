@@ -1,5 +1,6 @@
 package staffmanagementproject;
 
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 import models.Developer;
@@ -29,9 +30,9 @@ public class StaffManagementProject {
             System.out.println("0. Exit");
             System.out.println("----------------");
             System.out.print("Make a choice: ");
-
-            int choice = sc.nextInt();
-            sc.nextLine();
+            
+            int choice = EmployeeManagement.tryInput();
+            
 
             switch (choice) {
 
@@ -40,6 +41,9 @@ public class StaffManagementProject {
                     break;
                 case 2:
                     statisticsMenu();
+                    break;
+                default:
+                    System.out.println("Not a valid input, choose between [1],[2],[0]");
                     break;
                 case 0:
                     loop = false;
@@ -62,8 +66,7 @@ public class StaffManagementProject {
             System.out.println("----------------");
             System.out.print("Make a choice: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = EmployeeManagement.tryInput();
 
             switch (choice) {
 
@@ -74,8 +77,10 @@ public class StaffManagementProject {
                     System.out.println("Remove employee");
                     System.out.println("1. By ID");
                     System.out.println("2. By Name");
-                    choice = sc.nextInt();
-                    sc.nextLine();
+                    
+                    
+                    choice = EmployeeManagement.tryInput();
+                    //sc.nextLine();
                     switch (choice) {
                         case 1:
                             EmployeeManagement.removeEmployeeById();
@@ -84,7 +89,7 @@ public class StaffManagementProject {
                             EmployeeManagement.removeEmployeeByName();
                             break;
                         default:
-                            System.out.println("Not a valid input, try again");
+                            System.out.println("Not a valid input, choose between [1],[2]");
                             break;
                     }
                     break;
@@ -93,11 +98,14 @@ public class StaffManagementProject {
                     break;
                 case 4:
                     System.out.print("Enter ID: ");
-                    int id = sc.nextInt();
+                    int id = EmployeeManagement.tryInput();
                     EmployeeManagement.showOneEmployeeById(id);
                     break;
                 case 5:
                     updateMenu();
+                    break;
+                default:
+                    System.out.println("Not a valid input, choose between [1],[2],[3],[4],[5],[0]");
                     break;
                 case 0:
                     loop = false;
@@ -110,7 +118,7 @@ public class StaffManagementProject {
         System.out.println("Update employee information");
         System.out.print("Enter ID: ");
         
-        int id = sc.nextInt();
+        int id = EmployeeManagement.tryInput();
         Employee employee = EmployeeManagement.showOneEmployeeById(id);
         if(employee==null){
             return;
@@ -132,8 +140,10 @@ public class StaffManagementProject {
             System.out.println("6. Spend budget");
         }
         System.out.println("0. Return to Management Menu");
-        int choice = sc.nextInt();
-        sc.nextLine();
+        
+        int choice = EmployeeManagement.tryInput();
+        //sc.nextLine();
+        
         switch (choice) {
             case 1:
                 EmployeeManagement.updateNameOfEmployeeById(id);
@@ -186,12 +196,13 @@ public class StaffManagementProject {
             System.out.println("3. Bonus data");
             System.out.println("4. Ages data");
             System.out.println("5. Gender data");
+            System.out.println("6. Sort Employees");
             System.out.println("0. Return to Main Menu");
             System.out.println("----------------");
             System.out.print("Make a choice: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = EmployeeManagement.tryInput();
+            //sc.nextLine();
 
             switch (choice) {
 
@@ -204,7 +215,9 @@ public class StaffManagementProject {
                     System.out.println("2: Lowest salary");
                     System.out.println("3: Average ");
                     System.out.println("4. Show all salaries");
-                    choice = sc.nextInt();
+                    
+                    choice = EmployeeManagement.tryInput();
+                    
                     switch (choice) {
                         case 1:
                             EmployeeStatistics.maxSalary();
@@ -219,7 +232,7 @@ public class StaffManagementProject {
                             EmployeeStatistics.allSalaries();
                             break;
                         default:
-                            System.out.println("Not a valid input, try agian");
+                            System.out.println("Not a valid input, choose between [1],[2],[3],[4]");
                             break;
                     }
                     break;
@@ -229,7 +242,30 @@ public class StaffManagementProject {
                 case 4:
                     EmployeeStatistics.showAges();
                     break;
-                case 5: EmployeeStatistics.showGenders();
+                case 5: 
+                    EmployeeStatistics.showGenders();
+                    break;
+                case 6:
+                    System.out.println("Sort by: ");
+                    System.out.println("1: Name");
+                    System.out.println("2: Birthdate");
+
+                    choice = EmployeeManagement.tryInput();
+
+                    switch (choice) {
+                        case 1:
+                            EmployeeStatistics.sortByName();
+                            break;
+                        case 2:
+                            EmployeeStatistics.sortByBirthdate();
+                            break;
+                        default:
+                            System.out.println("Not a valid input, choose between [1],[2]");
+                            break;
+                    }
+                    break;
+                default: 
+                    System.out.println("Not a valid input, choose between [1],[2],[3],[4],[5],[0]");
                     break;
                 case 0:
                     loop = false;
@@ -237,4 +273,5 @@ public class StaffManagementProject {
             }
         }
     }
+    
 }
