@@ -35,35 +35,51 @@ public class EmployeeStatistics {
         System.out.println("Number of Web Designers: " + webDesigners);
         System.out.println("Number of Technician: " + technicians);
         System.out.println("Number of Marketing employees: " + marketing + "\n");
+        
     }
 
     public static void averageSalary() {
-        double averageSalary = 0;
-        for (Employee currentEmployee : employeeList) {
-            averageSalary += currentEmployee.getSalary();
-        }
-        double sum = averageSalary / employeeList.size();
-        System.out.printf("Average salary: %,.2f\n", sum);
+        double sum = employeeList.stream()
+                .mapToDouble(Employee::getSalary)
+                .sum();
+        
+        double averageSalary = sum / employeeList.size();
+        System.out.printf("\nAverage salary: %,.2f\n", averageSalary);
+        System.out.println("");
     }
 
     public static void maxSalary() {
-        int max = 0;
-        for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getSalary() > employeeList.get(max).getSalary()) {
-                max = i;
-            }
-        }
-        System.out.printf(employeeList.get(max).getName() + " %,.2f\n", employeeList.get(max).getSalary());
+
+        System.out.println("");
+        double max = employeeList.stream()
+                .mapToDouble(Employee::getSalary)
+                .max().getAsDouble();
+        
+         employeeList.stream()
+                .filter(e -> e.getSalary() == max)
+                .map(Employee::getName)
+                .forEach(e -> System.out.print(e + " "));
+
+         System.out.printf(" %,.2f\n", max);
+         System.out.println("");
+                
     }
 
     public static void minSalary() {
-        int min = 0;
-        for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getSalary() < employeeList.get(min).getSalary()) {
-                min = i;
-            }
-        }
-        System.out.printf(employeeList.get(min).getName() + " %,.2f\n", employeeList.get(min).getSalary());
+        
+        System.out.println("");
+        double min = employeeList.stream()
+                .mapToDouble(Employee::getSalary)
+                .min().getAsDouble();
+
+        employeeList.stream()
+                .filter(e -> e.getSalary() == min)
+                .map(Employee::getName)
+                .forEach(e -> System.out.print(e + " "));
+
+        System.out.printf("%,.2f\n", min);
+        System.out.println("");
+
     }
 
     public static void sumBonus() {
@@ -82,6 +98,7 @@ public class EmployeeStatistics {
         System.out.println("\nAll salaries in ascending order:\n");
         ArrayList<Employee> sortedList = new ArrayList<>(employeeList);
         Collections.sort(sortedList);
+        
         System.out.println("ID:  Name:                 Salary:");
         for (Employee currentEmployee : sortedList) {
             String name = currentEmployee.getName();
@@ -118,23 +135,44 @@ public class EmployeeStatistics {
     }
 
     public static void showGenders() {
-        int women = 0, men = 0, unknown = 0;
-        for (Employee employee : employeeList) {
-            if (employee.getGender() == MALE) {
-                men++;
-            } else if (employee.getGender() == FEMALE) {
-                women++;
-            } else if (employee.getGender() == UNKNOWN) {
-                unknown++;
-            }
-        }
-        double porcentage = 100.0 / (men + women + unknown);
-        System.out.println("\nNumber of men: " + men + " (" + String.format("%.2f", men * porcentage) + "%)");
-        System.out.println("Number of women: " + women + " (" + String.format("%.2f", women * porcentage) + "%)\n");
-        if (unknown > 0) {
-            System.out.println("Number of people with unknown gender: " + unknown + " (" + String.format("%.2f", unknown * porcentage) + "%)");
 
+        long men = employeeList.stream()
+                .filter(e -> e.getGender() == MALE)
+                .count();
+        
+        long women = employeeList.stream()
+                .filter(e -> e.getGender() == FEMALE)
+                .count();
+        
+        long unknown = employeeList.stream()
+                .filter(e -> e.getGender() == UNKNOWN)
+                .count();
+        
+        double percentage = 100.0 / (men + women + unknown);
+        System.out.println("\nNumber of men: " + men + " (" + String.format("%.2f", men * percentage) + "%)");
+        System.out.println("Number of women: " + women + " (" + String.format("%.2f", women * percentage) + "%)\n");
+        if (unknown > 0){
+            System.out.println("Number of people with unknown gender: " + unknown + " (" + String.format("%.2f", unknown * percentage) + "%)\n");
         }
+
+        employeeList.stream()
+                .filter(e -> e.getGender() == MALE)
+                .map(e -> e.getGender() + " " + e.getName())
+                .forEach(System.out::println);
+        
+        System.out.println("");
+        
+        employeeList.stream()
+                .filter(e -> e.getGender() == FEMALE)
+                .map(e -> e.getGender() + " " + e.getName())
+                .forEach(System.out::println);
+        
+        System.out.println("");
+        
+        employeeList.stream()
+                .filter(e -> e.getGender() == UNKNOWN)
+                .map(e -> e.getGender() + " " + e.getName())
+                .forEach(System.out::println);
     }
     
     public static void sortByName(){

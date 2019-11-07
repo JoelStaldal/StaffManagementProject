@@ -165,6 +165,7 @@ public class EmployeeManagement {
         }
         if (jobChoice > 0 && jobChoice < 5) {
             System.out.println("\nEmployee is added successfully to system");
+            header();
             System.out.println(employeeList.get(employeeList.size() - 1));
         }
     }
